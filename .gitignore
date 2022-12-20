@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Project folder
+experiments/.DS_Store
+.DS_Store
+data
+experiments/data_original
+models
+venv
+.venv
