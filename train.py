@@ -1,17 +1,12 @@
 import os
 
-os.environ["OPENBLAS_NUM_THREADS"] = "1"
-os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
-os.environ["MKL_NUM_THREADS"] = "1"
 
 import warnings
 
-warnings.filterwarnings("ignore")
 
 import pandas as pd
 import numpy as np
 import random
-import time
 from joblib import dump
 
 from rectools.models import PopularModel, LightFMWrapperModel
@@ -22,6 +17,11 @@ from pathlib import Path
 
 from lightfm import LightFM
 
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
+os.environ["MKL_NUM_THREADS"] = "1"
+
+warnings.filterwarnings("ignore")
 
 # set seed
 RANDOM_STATE = 42
@@ -37,10 +37,12 @@ interactions = pd.read_csv(DATA_PATH / "interactions.csv")
 
 Columns.Datetime = "last_watch_dt"
 interactions.drop(
-    interactions[interactions[Columns.Datetime].str.len() != 10].index, inplace=True
+    interactions[interactions[Columns.Datetime].str.len() != 10].index,
+    inplace=True,
 )
 interactions[Columns.Datetime] = pd.to_datetime(
-    interactions[Columns.Datetime], format="%Y-%m-%d"
+    interactions[Columns.Datetime],
+    format="%Y-%m-%d",
 )
 max_date = interactions[Columns.Datetime].max()
 interactions[Columns.Weight] = np.where(interactions["watched_pct"] > 10, 3, 1)
@@ -97,7 +99,9 @@ best_light_fm_params = {
 N_EPOCHS = 1
 NUM_THREADS = 8
 best_model = LightFMWrapperModel(
-    LightFM(**best_light_fm_params), epochs=N_EPOCHS, num_threads=NUM_THREADS
+    LightFM(**best_light_fm_params),
+    epochs=N_EPOCHS,
+    num_threads=NUM_THREADS,
 )
 best_model.fit(dataset)
 

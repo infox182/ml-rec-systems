@@ -1,5 +1,4 @@
 from joblib import load
-import pandas as pd
 import numpy as np
 import hnswlib
 
@@ -12,12 +11,12 @@ class FmModel:
         self.item_id_map = dataset.item_id_map
         self.user_id_map = dataset.user_id_map
         self.popular_items = dataset.item_id_map.convert_to_external(
-            popular_model.popularity_list[0][:10]
+            popular_model.popularity_list[0][:10],
         )
 
         user_embeddings, item_embeddings = self.model.get_vectors(dataset)
         max_norm, augmented_item_embeddings = self.augment_inner_product(
-            item_embeddings
+            item_embeddings,
         )
         extra_zero = np.zeros((user_embeddings.shape[0], 1))
         augmented_user_embeddings = np.append(user_embeddings, extra_zero, axis=1)
@@ -53,7 +52,7 @@ class FmModel:
         query = self.augmented_user_embeddings[internal_user_ids]
         item_labels, _ = self.hnsw.knn_query(query, k=top_k)
         real_labels = np.array(
-            list(map(self.item_id_map.convert_to_external, item_labels))
+            list(map(self.item_id_map.convert_to_external, item_labels)),
         )
         if real_labels.shape[0] == 1:
             real_labels = real_labels[0]
