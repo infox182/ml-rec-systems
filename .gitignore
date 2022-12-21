@@ -131,12 +131,11 @@ dmypy.json
 # Project folder
 experiments/.DS_Store
 .DS_Store
-data
 experiments/data_original
 models
 new_models
-best_models
 venv
 .venv
 dev-venv
 .vscode
+.gitattributes
