@@ -16,6 +16,7 @@ build==0.9.0
 setuptools==57.4.0
 
 # code formatter
+pre-commit==2.20.0
 black==22.12.0
 flake8==6.0.0
 flake8-commas

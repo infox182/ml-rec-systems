@@ -31,3 +31,14 @@
 ```
   pip install -i https://test.pypi.org/simple/ test-rec-system==1.0.0
 ```
+
+## Используемые линтеры и форматеры
+### Форматер
+  **black**
+
+### Плагины для **flake8**
+1. flake8-commas
+2. flake8-bugbear
+3. flake8-return
+4. flake8-builtins
+5. flake8-unused-arguments
