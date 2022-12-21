@@ -51,17 +51,13 @@ interactions[Columns.Datetime] = pd.to_datetime(
 )
 max_date = interactions[Columns.Datetime].max()
 interactions[Columns.Weight] = np.where(interactions["watched_pct"] > 10, 3, 1)
-train = interactions[
-    interactions[Columns.Datetime] < max_date - 2 * pd.Timedelta(days=7)
-].copy()
+train = interactions[interactions[Columns.Datetime] < max_date - 2 * pd.Timedelta(days=7)].copy()
 
 valid = interactions[
     (max_date - 2 * pd.Timedelta(days=7) <= interactions[Columns.Datetime])
     & (interactions[Columns.Datetime] <= max_date - pd.Timedelta(days=7))
 ].copy()
-test = interactions[
-    interactions[Columns.Datetime] > max_date - pd.Timedelta(days=7)
-].copy()
+test = interactions[interactions[Columns.Datetime] > max_date - pd.Timedelta(days=7)].copy()
 
 print(f"train: {train.shape}")
 print(f"valid: {valid.shape}")
@@ -93,9 +89,7 @@ user_features = pd.concat(user_features_frames)
 # item features
 items = items.loc[items[Columns.Item].isin(train[Columns.Item])].copy()
 
-items["genre"] = (
-    items["genres"].str.lower().str.replace(", ", ",", regex=False).str.split(",")
-)
+items["genre"] = items["genres"].str.lower().str.replace(", ", ",", regex=False).str.split(",")
 genre_feature = items[["item_id", "genre"]].explode("genre")
 genre_feature.columns = ["id", "value"]
 genre_feature["feature"] = "genre"

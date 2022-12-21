@@ -65,9 +65,7 @@ user_features = pd.concat(user_features_frames)
 
 items = items.loc[items[Columns.Item].isin(train[Columns.Item])].copy()
 
-items["genre"] = (
-    items["genres"].str.lower().str.replace(", ", ",", regex=False).str.split(",")
-)
+items["genre"] = items["genres"].str.lower().str.replace(", ", ",", regex=False).str.split(",")
 genre_feature = items[["item_id", "genre"]].explode("genre")
 genre_feature.columns = ["id", "value"]
 genre_feature["feature"] = "genre"
