@@ -42,3 +42,27 @@
 3. flake8-return
 4. flake8-builtins
 5. flake8-unused-arguments
+
+## Версионирование данных
+
+Используется Git LFS
+
+**Команды:**
+
+#### Установка Git LFS на mac
+```
+  brew install git-lfs
+```
+
+#### Отслеживание файлов
+```
+  git lfs track "*.joblib"
+  git lfs track "*.csv"
+```
+
+### Добавление файлов
+
+```
+  git add data/
+  git add best_models/
+```
