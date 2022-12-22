@@ -66,3 +66,13 @@
   git add data/
   git add best_models/
 ```
+
+## Pipline запуска
+
+Используется **make**
+
+1. make start - установка окружения, обучение модели, запуск CLI для рекомендаций
+2. make setup - установка окружения
+3. make clean - удаление папки с окружением
+4. make train - обучение модели
+5. make run - запуск CLI
